@@ -91,7 +91,6 @@ namespace GestioneNOC
                        + "         D.Descr1;";
 
 
-
             }
 
             GetData();
