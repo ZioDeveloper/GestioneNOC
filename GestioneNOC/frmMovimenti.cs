@@ -71,6 +71,11 @@ namespace GestioneNOC
                        + "       SUM(Danni_NOC.Importo) AS ImportoNOC, \n"
                        + "       SUM(DISTINCT RDTDealerDettagliDanni.Importo) AS ImportoScheda,\n"
                        + "       CASE\n"
+                       + "           WHEN MAX(CONVERT(INT, ISNocVerified)) > 0\n"
+                       + "           THEN 'Si'\n"
+                       + "           ELSE 'No'\n"
+                       + "       END AS Verificato,\n"
+                       + "       CASE\n"
                        + "           WHEN MAX(CONVERT(INT, ISFatturato)) > 0\n"
                        + "           THEN 'Si'\n"
                        + "           ELSE 'No'\n"
@@ -88,7 +93,7 @@ namespace GestioneNOC
                        + "         Danni_NOC.DataTreno, \n"
                        + "         DWH_RespDanniDecoded_vw.Mercato, \n"
                        + "         Dealer, \n"
-                       + "         D.Descr1;";
+                       + "         D.Descr1,ISNocVerified;";
 
 
             }
@@ -199,6 +204,19 @@ namespace GestioneNOC
             
 
             MessageBox.Show("Aggiornamento dati da CSMS terminato");
+        }
+
+       
+
+        private void masterDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (masterDataGridView.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = masterDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = masterDataGridView.Rows[selectedrowindex];
+                txtTelaio.Text = Convert.ToString(selectedRow.Cells["Chassis"].Value);
+            }
+
         }
     }
 }

@@ -36,6 +36,7 @@
             this.cmdVisualizzaDati = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUtilities = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportaDaCSV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuImportaDaCSV_IVECO = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDisposizioneFogli = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDispCascade = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDispAffVert = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +101,8 @@
             // mnuUtilities
             // 
             this.mnuUtilities.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuImportaDaCSV});
+            this.mnuImportaDaCSV,
+            this.mnuImportaDaCSV_IVECO});
             this.mnuUtilities.Image = ((System.Drawing.Image)(resources.GetObject("mnuUtilities.Image")));
             this.mnuUtilities.Name = "mnuUtilities";
             this.mnuUtilities.Size = new System.Drawing.Size(66, 20);
@@ -109,9 +111,16 @@
             // mnuImportaDaCSV
             // 
             this.mnuImportaDaCSV.Name = "mnuImportaDaCSV";
-            this.mnuImportaDaCSV.Size = new System.Drawing.Size(175, 22);
-            this.mnuImportaDaCSV.Text = "Importa da file CSV";
+            this.mnuImportaDaCSV.Size = new System.Drawing.Size(260, 22);
+            this.mnuImportaDaCSV.Text = "Importa NOC da file CSV x Fax2RDT";
             this.mnuImportaDaCSV.Click += new System.EventHandler(this.mnuImportaDaCSV_Click);
+            // 
+            // mnuImportaDaCSV_IVECO
+            // 
+            this.mnuImportaDaCSV_IVECO.Name = "mnuImportaDaCSV_IVECO";
+            this.mnuImportaDaCSV_IVECO.Size = new System.Drawing.Size(260, 22);
+            this.mnuImportaDaCSV_IVECO.Text = "Importa pregressi IVECO";
+            this.mnuImportaDaCSV_IVECO.Click += new System.EventHandler(this.mnuImportaDaCSV_IVECO_Click);
             // 
             // mnuDisposizioneFogli
             // 
@@ -160,7 +169,7 @@
             // mnuHelp_Info
             // 
             this.mnuHelp_Info.Name = "mnuHelp_Info";
-            this.mnuHelp_Info.Size = new System.Drawing.Size(180, 22);
+            this.mnuHelp_Info.Size = new System.Drawing.Size(138, 22);
             this.mnuHelp_Info.Text = "Info";
             this.mnuHelp_Info.Click += new System.EventHandler(this.mnuHelp_Info_Click);
             // 
@@ -170,7 +179,7 @@
             this.cmdSfondoSi,
             this.cmdSfondoNo});
             this.cmdSfondo.Name = "cmdSfondo";
-            this.cmdSfondo.Size = new System.Drawing.Size(180, 22);
+            this.cmdSfondo.Size = new System.Drawing.Size(138, 22);
             this.cmdSfondo.Text = "Sfondo";
             this.cmdSfondo.Visible = false;
             // 
@@ -192,7 +201,7 @@
             this.mnuColorDefault,
             this.mnuColorWhiteSmoke});
             this.coloreToolStripMenuItem.Name = "coloreToolStripMenuItem";
-            this.coloreToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.coloreToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.coloreToolStripMenuItem.Text = "Colore";
             this.coloreToolStripMenuItem.Visible = false;
             // 
@@ -211,7 +220,7 @@
             // mnuCRTesting
             // 
             this.mnuCRTesting.Name = "mnuCRTesting";
-            this.mnuCRTesting.Size = new System.Drawing.Size(180, 22);
+            this.mnuCRTesting.Size = new System.Drawing.Size(138, 22);
             this.mnuCRTesting.Text = "CR Testing...";
             this.mnuCRTesting.Visible = false;
             // 
@@ -223,7 +232,9 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "Auto Data Analyzer";
+            this.Deactivate += new System.EventHandler(this.frmMain_Deactivate);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -253,6 +264,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuColorWhiteSmoke;
         private System.Windows.Forms.ToolStripMenuItem mnuCRTesting;
         private System.Windows.Forms.ToolStripMenuItem cmdVisualizzaDati;
+        private System.Windows.Forms.ToolStripMenuItem mnuImportaDaCSV_IVECO;
     }
 }
 

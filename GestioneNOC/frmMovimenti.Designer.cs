@@ -53,6 +53,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cboSelect = new System.Windows.Forms.ToolStripComboBox();
             this.gbFiltri = new System.Windows.Forms.GroupBox();
+            this.txtTelaio = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.chkFiltraXDate = new System.Windows.Forms.CheckBox();
@@ -136,6 +137,7 @@
             this.masterDataGridView.Size = new System.Drawing.Size(1211, 299);
             this.masterDataGridView.TabIndex = 6;
             this.masterDataGridView.VirtualMode = true;
+            this.masterDataGridView.SelectionChanged += new System.EventHandler(this.masterDataGridView_SelectionChanged);
             // 
             // bindNav
             // 
@@ -299,6 +301,7 @@
             // gbFiltri
             // 
             this.gbFiltri.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbFiltri.Controls.Add(this.txtTelaio);
             this.gbFiltri.Controls.Add(this.textBox1);
             this.gbFiltri.Controls.Add(this.label3);
             this.gbFiltri.Controls.Add(this.chkFiltraXDate);
@@ -308,12 +311,19 @@
             this.gbFiltri.Controls.Add(this.label1);
             this.gbFiltri.Controls.Add(this.dtEnd);
             this.gbFiltri.Controls.Add(this.dtIni);
-            this.gbFiltri.Location = new System.Drawing.Point(10, 12);
+            this.gbFiltri.Location = new System.Drawing.Point(10, 9);
             this.gbFiltri.Name = "gbFiltri";
             this.gbFiltri.Size = new System.Drawing.Size(1191, 165);
             this.gbFiltri.TabIndex = 3;
             this.gbFiltri.TabStop = false;
             this.gbFiltri.Text = "Filtri:";
+            // 
+            // txtTelaio
+            // 
+            this.txtTelaio.Location = new System.Drawing.Point(1036, 19);
+            this.txtTelaio.Name = "txtTelaio";
+            this.txtTelaio.Size = new System.Drawing.Size(137, 20);
+            this.txtTelaio.TabIndex = 16;
             // 
             // textBox1
             // 
@@ -405,7 +415,7 @@
             this.ClientSize = new System.Drawing.Size(1215, 525);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmMovimenti";
-            this.Text = "frmMovimenti";
+            this.Text = "Movimenti";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -455,5 +465,6 @@
         private System.Windows.Forms.CheckBox chkFiltraXDate;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtTelaio;
     }
 }

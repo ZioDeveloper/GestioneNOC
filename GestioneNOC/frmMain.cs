@@ -76,5 +76,30 @@ namespace GestioneNOC
             myfrmSplash.Show();
             myfrmSplash.MdiParent = this;
         }
+
+        private void mnuImportaDaCSV_IVECO_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(frmImportaDaCSV_IVECO))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            frmImportaDaCSV_IVECO myfrmImportaDaCSV_IVECO = new frmImportaDaCSV_IVECO();
+            myfrmImportaDaCSV_IVECO.Show();
+            myfrmImportaDaCSV_IVECO.MdiParent = this;
+        }
+
+        private void frmMain_Deactivate(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -135,7 +135,7 @@
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelProductName);
             this.Name = "frmSplash";
-            this.Text = "frmSplash";
+            this.Text = "Info";
             this.ResumeLayout(false);
             this.PerformLayout();
 
