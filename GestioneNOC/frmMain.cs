@@ -101,5 +101,20 @@ namespace GestioneNOC
         {
             Application.Exit();
         }
+
+        private void mnuAggiornaAvvisi_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(frmAggiornaAvvisiFax2RDT))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            frmAggiornaAvvisiFax2RDT myfrmAggiornaAvvisiFax2RDT = new frmAggiornaAvvisiFax2RDT();
+            myfrmAggiornaAvvisiFax2RDT.Show();
+            myfrmAggiornaAvvisiFax2RDT.MdiParent = this;
+        }
     }
 }

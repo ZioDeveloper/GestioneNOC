@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDataAnalyzer", "GestioneNOC\AutoDataAnalyzer.csproj", "{88B6A139-9D5F-49CC-AEFC-6D989F53B69F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestioneNOC", "GestioneNOC\GestioneNOC.csproj", "{88B6A139-9D5F-49CC-AEFC-6D989F53B69F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

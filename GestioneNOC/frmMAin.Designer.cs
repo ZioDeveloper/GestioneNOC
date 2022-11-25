@@ -50,6 +50,7 @@
             this.mnuColorDefault = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuColorWhiteSmoke = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCRTesting = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAggiornaAvvisi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,15 +95,16 @@
             // cmdVisualizzaDati
             // 
             this.cmdVisualizzaDati.Name = "cmdVisualizzaDati";
-            this.cmdVisualizzaDati.Size = new System.Drawing.Size(147, 22);
-            this.cmdVisualizzaDati.Text = "Visualizza dati";
+            this.cmdVisualizzaDati.Size = new System.Drawing.Size(181, 22);
+            this.cmdVisualizzaDati.Text = "NOC -Visualizza dati";
             this.cmdVisualizzaDati.Click += new System.EventHandler(this.cmdVisualizzaDati_Click);
             // 
             // mnuUtilities
             // 
             this.mnuUtilities.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuImportaDaCSV,
-            this.mnuImportaDaCSV_IVECO});
+            this.mnuImportaDaCSV_IVECO,
+            this.mnuAggiornaAvvisi});
             this.mnuUtilities.Image = ((System.Drawing.Image)(resources.GetObject("mnuUtilities.Image")));
             this.mnuUtilities.Name = "mnuUtilities";
             this.mnuUtilities.Size = new System.Drawing.Size(66, 20);
@@ -224,6 +226,13 @@
             this.mnuCRTesting.Text = "CR Testing...";
             this.mnuCRTesting.Visible = false;
             // 
+            // mnuAggiornaAvvisi
+            // 
+            this.mnuAggiornaAvvisi.Name = "mnuAggiornaAvvisi";
+            this.mnuAggiornaAvvisi.Size = new System.Drawing.Size(260, 22);
+            this.mnuAggiornaAvvisi.Text = "Aggiornamento avvisi FAX2RDT";
+            this.mnuAggiornaAvvisi.Click += new System.EventHandler(this.mnuAggiornaAvvisi_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -232,6 +241,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto Data Analyzer";
             this.Deactivate += new System.EventHandler(this.frmMain_Deactivate);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
@@ -265,6 +275,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuCRTesting;
         private System.Windows.Forms.ToolStripMenuItem cmdVisualizzaDati;
         private System.Windows.Forms.ToolStripMenuItem mnuImportaDaCSV_IVECO;
+        private System.Windows.Forms.ToolStripMenuItem mnuAggiornaAvvisi;
     }
 }
 
