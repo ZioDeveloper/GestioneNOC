@@ -10,17 +10,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace GestioneNOC
 {
-    public partial class frmAggiornaAvvisiFax2RDT : Form
+    public partial class frmAggiornaAvvisiIVECO : Form
     {
         string myFileName = "";
         string fileName = "";
         string SQL = "";
 
-        public frmAggiornaAvvisiFax2RDT()
+        public frmAggiornaAvvisiIVECO()
         {
             InitializeComponent();
         }
@@ -53,7 +52,7 @@ namespace GestioneNOC
                 Directory.CreateDirectory(dir);
             }
 
-           
+
 
             try
             {
@@ -86,7 +85,7 @@ namespace GestioneNOC
             myFileName = lblFileName.Text;
             Cursor = Cursors.WaitCursor;
 
-            if (String.IsNullOrEmpty(myFileName ) || myFileName == "...")
+            if (String.IsNullOrEmpty(myFileName) || myFileName == "...")
             {
                 MessageBox.Show("Selezionare un file !", "Errore", MessageBoxButtons.OK);
 
@@ -98,7 +97,7 @@ namespace GestioneNOC
             if (String.IsNullOrEmpty(txtTestoDaInserire.Text))
             {
                 MessageBox.Show("Inserire una descrizione !", "Errore", MessageBoxButtons.OK);
-                
+
                 Application.DoEvents();
                 Cursor = Cursors.Default;
                 return;
@@ -112,7 +111,7 @@ namespace GestioneNOC
 
             //MessageBox.Show("load data succ.....!");
             //txtFileName.Text = string.Empty;
-            txtLog.Text += Environment.NewLine + "Importazione terminata."+Environment.NewLine;
+            txtLog.Text += Environment.NewLine + "Importazione terminata." + Environment.NewLine;
             Application.DoEvents();
             Cursor = Cursors.Default;
         }
@@ -120,8 +119,8 @@ namespace GestioneNOC
         {
             // Cancella dati da Tabella appoggio...
 
-            
-            txtLog.Text += "Importo i dati nella tabella temporanea." + Environment.NewLine + Environment.NewLine; 
+
+            txtLog.Text += "Importo i dati nella tabella temporanea." + Environment.NewLine + Environment.NewLine;
             Application.DoEvents();
 
             DataTable importedData = new DataTable();
@@ -182,7 +181,7 @@ namespace GestioneNOC
         private bool HasVINBlocked()
         {
             int cnt = 0;
-            string cs = "CSMS".GetConnectionStringComplete();
+            string cs = "IVECO".GetConnectionStringComplete();
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
@@ -213,7 +212,7 @@ namespace GestioneNOC
 
             }
 
-             return cnt > 1;
+            return cnt > 1;
         }
 
         private void SaveImportDataToDatabase(DataTable imported_data)
@@ -222,29 +221,29 @@ namespace GestioneNOC
             bool IsBlocked = HasVINBlocked();
             if (IsBlocked)
             {
-                txtLog.Text += "Impossibile proseguire, esiste almeno un telaio NON UNIVOCO."+ Environment.NewLine;
+                txtLog.Text += "Impossibile proseguire, esiste almeno un telaio NON UNIVOCO." + Environment.NewLine;
                 Application.DoEvents();
                 return;
             }
             int I = 0;
-            string cs = "CSMS".GetConnectionStringComplete();
+            string cs = "IVECO".GetConnectionStringComplete();
             using (SqlConnection conn = new SqlConnection(cs))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    SQL = " DELETE  ElencoTelai" ;
+                    SQL = " DELETE  ElencoTelai";
 
                     cmd.CommandText = SQL;
                     cmd.Connection = conn;
                     int ins = 0;
                     ins = cmd.ExecuteNonQuery();
-                    txtLog.Text += "Cancellati i precedenti : " + ins.ToString("#,##0") + " telai" + Environment.NewLine; 
+                    txtLog.Text += "Cancellati i precedenti : " + ins.ToString("#,##0") + " telai" + Environment.NewLine;
                     Application.DoEvents();
                     //return;
                 }
 
-                
+
                 foreach (DataRow importRow in imported_data.Rows)
                 {
 
@@ -260,31 +259,31 @@ namespace GestioneNOC
                         SQL = " INSERT INTO  ElencoTelai( Telaio)" +
                              "   VALUES( @IDTelaio) ";
 
-                        string myTelaio = importRow["Telaio"].ToString().Replace(" ", "");
-                        cmd.Parameters.AddWithValue("@IDTelaio", myTelaio.Right(8));
+
+                        cmd.Parameters.AddWithValue("@IDTelaio", importRow["Telaio"].ToString());
 
                         cmd.CommandText = SQL;
                         cmd.Connection = conn;
-                        int ins = cmd.ExecuteNonQuery();
-                        I++;
-                       
-                        
+                        try
+                        {
+                            int ins = cmd.ExecuteNonQuery();
+                            I++;
+                        }
+                        catch { } // Brucio eccezione SQL in caso di telai doppi, così  i telai sono univoci, per via dell'indice univoco in tabella SQL 
+
+
                         Application.DoEvents();
-                       
+
                     }
-                    
+
                 }
                 txtLog.Text += "Inseriti : " + I.ToString("#,##0") + " telai." + Environment.NewLine;
 
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    string myText = txtTestoDaInserire.Text;
-                    string myCleanText = myText.Replace("'", "''");
-                    myCleanText = myText.Replace(@"[\0-\b\t-\r\x0B\x0C]", "");
-
                     SQL = "UPDATE TelaiWarning\n"
                        + "  SET \n"
-                       + "      Annotazioni = CAST(" + Utils.QuotedStr(txtTestoDaInserire.Text.Replace("'",""))+ " AS VARCHAR(MAX)) + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) + CAST(TelaiWarning.Annotazioni AS VARCHAR(MAX))\n"
+                       + "      Annotazioni = CAST(" + Utils.QuotedStr(txtTestoDaInserire.Text) + " AS VARCHAR(MAX)) + CHAR(13) + CHAR(10) + CHAR(13) + CHAR(10) + CAST(TelaiWarning.Annotazioni AS VARCHAR(MAX))\n"
                        + "WHERE ID IN\n"
                        + "(\n"
                        + "    SELECT ID\n"
@@ -293,7 +292,7 @@ namespace GestioneNOC
                        + "    (\n"
                        + "        SELECT TelaiAnagrafica.ID AS IDTelaio\n"
                        + "        FROM ElencoTelai\n"
-                       + "             INNER JOIN TelaiAnagrafica --ON  ElencoTelai.Modello =  TelaiAnagrafica.IDModello\n"
+                       + "             INNER JOIN TelaiAnagrafica \n"
                        + "             ON ElencoTelai.Telaio = TelaiAnagrafica.Chassis\n"
                        + "             LEFT JOIN TelaiWarning ON dbo.TelaiAnagrafica.ID = dbo.TelaiWarning.IDTelaio\n"
                        + "        WHERE TelaiWarning.ID IS NOT NULL\n"
@@ -316,12 +315,9 @@ namespace GestioneNOC
                         + "(IDTelaio, Annotazioni \n"
                         + ")\n"
                         + "       SELECT TelaiAnagrafica.ID, \n"
-                        + " CAST (" + Utils.QuotedStr(txtTestoDaInserire.Text.Replace("'", "")) + " AS VARCHAR(MAX))\n"
+                        + " CAST (" + Utils.QuotedStr(txtTestoDaInserire.Text) + " AS VARCHAR(MAX))\n"
                         + "       FROM ElencoTelai\n"
-                        + "            INNER JOIN TelaiAnagrafica ON --ElencoTelai.Modello = TelaiAnagrafica.IDModello\n"
-                        + "            /*AND*/\n"
-                        + "\n"
-                        + "            ElencoTelai.Telaio = TelaiAnagrafica.Chassis\n"
+                        + "            INNER JOIN TelaiAnagrafica ON   ElencoTelai.Telaio = TelaiAnagrafica.Chassis\n"
                         + "            LEFT JOIN TelaiWarning ON dbo.TelaiAnagrafica.ID = dbo.TelaiWarning.IDTelaio\n"
                         + "       WHERE TelaiWarning.ID IS NULL\n"
                         + "             AND TelaiAnagrafica.ID IS NOT NULL\n"
@@ -369,7 +365,7 @@ namespace GestioneNOC
 
             System.IO.DirectoryInfo di = new DirectoryInfo(@"C:\CSMS\AggiornamentoAvvisi");
             di.CleandDirectory();
-            
+
 
             var file = @"C:\CSMS\AggiornamentoAvvisi\TelaiXAvvisi.csv";
 
@@ -379,12 +375,14 @@ namespace GestioneNOC
 
 
 
-                stream.WriteLine(csvRow.Replace(" ",""));
+                stream.WriteLine(csvRow);
             }
 
             Process.Start(file);
             lblFileName.Text = file;
         }
+
+       
     }
 }
-        
+

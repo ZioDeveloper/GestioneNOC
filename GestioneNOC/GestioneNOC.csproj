@@ -56,6 +56,12 @@
     <Compile Include="frmAggiornaAvvisiFax2RDT.Designer.cs">
       <DependentUpon>frmAggiornaAvvisiFax2RDT.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAggiornaAvvisiIVECO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAggiornaAvvisiIVECO.Designer.cs">
+      <DependentUpon>frmAggiornaAvvisiIVECO.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmImportaDaCSV_IVECO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="frmAggiornaAvvisiFax2RDT.resx">
       <DependentUpon>frmAggiornaAvvisiFax2RDT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAggiornaAvvisiIVECO.resx">
+      <DependentUpon>frmAggiornaAvvisiIVECO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportaDaCSV.resx">
       <DependentUpon>frmImportaDaCSV.cs</DependentUpon>

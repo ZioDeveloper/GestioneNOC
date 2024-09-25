@@ -17,6 +17,7 @@ namespace GestioneNOC
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmAggiornaAvvisiFax2RDT());
+           // Application.Run(new frmAggiornaAvvisiIVECO());
         }
     }
 }

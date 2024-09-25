@@ -29,6 +29,11 @@ namespace GestioneNOC
             return returnValue;
         }
 
+        public static void CleandDirectory(this System.IO.DirectoryInfo directory)
+        {
+            foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
+            foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+        }
         public static void CleanWorkDir(string aDir)
         {
             var files = from file in Directory.EnumerateFiles(aDir)
@@ -50,7 +55,7 @@ namespace GestioneNOC
 
         }
 
-        public static string GetConnectionStringComplete(string name)
+        public static string GetConnectionStringComplete(this string name)
         {
             // Assume failure.
             string returnValue = null;
